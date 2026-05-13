@@ -24,12 +24,15 @@ jobs:
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
-          
+
           # Пересоздаем тег latest
           git tag -d latest || true
           git push origin :refs/tags/latest || true
           git tag latest
           git push origin latest
+
+      - name: 📊 Generate HEARTBEAT.md
+        run: python3 .agent/scripts/generate_heartbeat.py --output .agent/HEARTBEAT.md
 
       - name: 🚀 Publish Release
         env:
