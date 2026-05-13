@@ -1,14 +1,20 @@
 repos:
+  # Python: Ruff (format + lint)
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    # Ruff version.
     rev: v0.4.1
     hooks:
-      # Run the linter.
       - id: ruff
         args: [ --fix ]
-      # Run the formatter.
       - id: ruff-format
-      
+
+  # C++: Clang-Format
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v18.1.1
+    hooks:
+      - id: clang-format
+        types: [c++, c, header]
+
+  # General: File checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
@@ -16,7 +22,9 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
+      - id: check-merge-conflict
 
+  # Local: Commit message validation
   - repo: local
     hooks:
       - id: strict-commit-msg
@@ -24,3 +32,11 @@ repos:
         language: python
         entry: python .agent/scripts/check_commit_msg.py
         stages: [commit-msg]
+
+      - id: clang-tidy
+        name: clang-tidy
+        language: system
+        entry: clang-tidy
+        types: [c++]
+        pass_filenames: true
+        stages: [commit]

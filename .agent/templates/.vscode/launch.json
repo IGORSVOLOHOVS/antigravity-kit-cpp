@@ -2,41 +2,82 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
-            "type": "debugpy",
+            "name": "C++ (GDB) - Debug",
+            "type": "cppdbg",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
+            "program": "${workspaceFolder}/build/bin/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "CMake: Build",
+            "miDebuggerPath": "/usr/bin/gdb"
         },
         {
-            "name": "Debug (LLDB)",
+            "name": "C++ (LLDB) - Debug",
             "type": "lldb",
             "request": "launch",
-            "program": "${command:cmake.launchTargetPath}",
+            "program": "${workspaceFolder}/build/bin/${fileBasenameNoExtension}",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "CMake: Build",
-            "terminal": "integrated",
-            "sourceLanguages": [
-                "cpp"
-            ]
+            "stopOnEntry": false,
+            "environment": [],
+            "externalConsole": false,
+            "sourceLanguages": ["cpp"],
+            "preLaunchTask": "CMake: Build"
         },
         {
-            "name": "Debug with Arguments",
-            "type": "lldb",
+            "name": "Python - Debug",
+            "type": "python",
             "request": "launch",
-            "program": "${command:cmake.launchTargetPath}",
-            "args": "${command:extension.commandvariable.promptString}",
-            "cwd": "${workspaceFolder}",
-            "preLaunchTask": "CMake: Build",
-            "terminal": "integrated"
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "stopOnEntry": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
         },
         {
-            "name": "Attach to Process",
-            "type": "lldb",
-            "request": "attach",
-            "program": "${command:cmake.launchTargetPath}",
-            "processId": "${command:pickProcess}"
+            "name": "Python - Pytest",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "${file}",
+                "-v",
+                "--tb=short"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "C++ - Run Tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/tests",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "CMake: Test"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Full Test Suite",
+            "configurations": ["C++ - Run Tests", "Python - Pytest"]
         }
     ]
 }

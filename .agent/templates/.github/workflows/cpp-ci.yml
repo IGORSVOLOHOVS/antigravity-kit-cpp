@@ -1,0 +1,45 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake clang clang-tidy lcov clang-format
+
+      - name: Install Dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: choco install cmake llvm clang-format -y
+
+      - name: Verify All (Build, Lint, Test, Coverage)
+        run: python3 .agent/scripts/verify_all.py
+
+      - name: Generate HEARTBEAT
+        if: always()
+        run: python3 .agent/scripts/generate_heartbeat.py --output .agent/HEARTBEAT.md
+
+      - name: Upload Coverage
+        if: always()
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./docs/coverage-report/index.html
+          flags: cpp

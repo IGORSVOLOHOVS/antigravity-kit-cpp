@@ -126,6 +126,104 @@
             "group": "none",
             "problemMatcher": [],
             "detail": "Generate documentation using Doxygen."
+        },
+        {
+            "label": "Verify All (Format, Build, Lint, Test)",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                ".agent/scripts/verify_all.py"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "detail": "Run complete validation pipeline (format check, build, lint, test, coverage)."
+        },
+        {
+            "label": "Generate HEARTBEAT.md",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                ".agent/scripts/generate_heartbeat.py",
+                "--output",
+                ".agent/HEARTBEAT.md"
+            ],
+            "group": "none",
+            "problemMatcher": [],
+            "detail": "Generate project health metrics report."
+        },
+        {
+            "label": "Format C++ (clang-format)",
+            "type": "shell",
+            "command": "clang-format",
+            "args": [
+                "-i",
+                "-style=file",
+                "${file}"
+            ],
+            "group": "none",
+            "problemMatcher": [],
+            "detail": "Format current C++ file using clang-format."
+        },
+        {
+            "label": "Lint C++ (clang-tidy)",
+            "type": "shell",
+            "command": "clang-tidy",
+            "args": [
+                "${file}",
+                "--",
+                "-std=c++23"
+            ],
+            "group": "none",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Run clang-tidy analysis on current C++ file."
+        },
+        {
+            "label": "Python: Format (ruff)",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "-m",
+                "ruff",
+                "format",
+                "${file}"
+            ],
+            "group": "none",
+            "problemMatcher": [],
+            "detail": "Format current Python file using ruff."
+        },
+        {
+            "label": "Python: Lint (ruff)",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "-m",
+                "ruff",
+                "check",
+                "${file}",
+                "--fix"
+            ],
+            "group": "none",
+            "problemMatcher": [],
+            "detail": "Lint and fix current Python file using ruff."
+        },
+        {
+            "label": "Python: Type Check (mypy)",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "-m",
+                "mypy",
+                "--strict",
+                "${file}"
+            ],
+            "group": "none",
+            "problemMatcher": [],
+            "detail": "Type check current Python file using mypy (strict mode)."
         }
     ]
 }
