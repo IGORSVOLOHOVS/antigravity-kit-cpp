@@ -28,9 +28,11 @@
     "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
 
     "clangd.path": "/usr/bin/clangd",
+    "clangd.onConfigChanged": "restart",
     "clangd.arguments": [
         "--background-index",
         "--clang-tidy",
+        "--clang-tidy-checks=*,-llvm-*,-google-*",
         "--header-insertion=iwyu",
         "--completion-style=detailed",
         "--function-arg-placeholders",
@@ -43,7 +45,8 @@
     "clangd.fallbackFlags": [
         "-std=c++23",
         "-Wall",
-        "-Wextra"
+        "-Wextra",
+        "-fPIE"
     ],
 
     "cmake.useCMakePresets": "always",
@@ -87,5 +90,14 @@
     },
     "python.testing.pytestEnabled": true,
     "python.testing.unittestEnabled": false,
-    "python.analysis.typeCheckingMode": "strict"
+    "python.analysis.typeCheckingMode": "strict",
+
+    "[cpp]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true
+    },
+    "[c]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    }
 }

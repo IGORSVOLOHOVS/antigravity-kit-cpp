@@ -14,7 +14,8 @@
         "ms-python.python",
         "charliermarsh.ruff",
         "ms-python.vscode-pylance",
-        "ms-python.mypy-type-checker"
+        "ms-python.mypy-type-checker",
+        "anthropic.claude-code"
     ],
     "unwantedRecommendations": [
         "ms-vscode.cpptools"
