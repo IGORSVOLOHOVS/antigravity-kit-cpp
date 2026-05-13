@@ -3,6 +3,14 @@
     "cpp-tools": {
       "command": "python3",
       "args": ["-m", "cpp_mcp_server"]
+    },
+    "python-lft": {
+      "command": "python3",
+      "args": ["-m", "python_lft_mcp"]
+    },
+    "mcp-cpp": {
+      "command": "python3",
+      "args": ["-m", "mcp_cpp"]
     }
   }
 }
