@@ -4,6 +4,35 @@ Reverse-engineered from the code at commit `8555323` on 2026-11-18. It describes
 repository does now, not what it was meant to do. Overview and known problems:
 [docs/README.md](docs/README.md).
 
+<!-- jira-sync:start -->
+Jira: KAN-121
+
+## Tasks
+
+This list is one ticket in Jira project KAN, [KAN-121](https://igorsvolohovs.atlassian.net/browse/KAN-121). Each line is a checkbox there: tick it in Jira and the sync ticks it here; add a checkbox there and it is appended here. Done items are the features described in section 3; open items are what the project declares but the code does not do yet.
+
+- [x] Project initialization (`scripts/install_github.py`) (section 3.1) <!-- spec-project-initialization-scripts-installgithub-py -->
+- [x] Global install and update (`scripts/install_github.py`) (section 3.2) <!-- spec-global-install-and-update-scripts-installgithub-py -->
+- [x] C++ automation scripts (`.agent/scripts/`) (section 3.3) <!-- spec-c-automation-scripts-agent-scripts -->
+- [x] Python automation scripts (`.agent/scripts/`) (section 3.4) <!-- spec-python-automation-scripts-agent-scripts -->
+- [x] Commit-message check (`.agent/scripts/check_commit_msg.py`) (section 3.5) <!-- spec-commit-message-check-agent-scripts-checkcommitmsg- -->
+- [x] Health report (`.agent/scripts/generate_heartbeat.py`) (section 3.6) <!-- spec-health-report-agent-scripts-generateheartbeat-py -->
+- [x] Release (`.github/workflows/publish-rules.yml`) (section 3.7) <!-- spec-release-github-workflows-publish-rules-yml -->
+- [x] Content tree (`.agent/`) (section 3.8) <!-- spec-content-tree-agent -->
+- [ ] 19 rules, all in `.agent/rules/` (declared, not implemented) <!-- spec-19-rules-all-in-agent-rules -->
+- [ ] Workflows split "12 C++ · 12 Python" (declared, not implemented) <!-- spec-workflows-split-12-c-12-python -->
+- [ ] `verify_all.py` covers nanobench and ASan (declared, not implemented) <!-- spec-verifyall-py-covers-nanobench-and-asan -->
+- [ ] `/test-coverage-python` fails below a coverage threshold (declared, not implemented) <!-- spec-test-coverage-python-fails-below-a-coverage-thresh -->
+- [ ] `/build-cpp` detects CMake presets (declared, not implemented) <!-- spec-build-cpp-detects-cmake-presets -->
+- [ ] `/static-analyze-cpp` runs cppcheck (declared, not implemented) <!-- spec-static-analyze-cpp-runs-cppcheck -->
+- [ ] Heartbeat collects nanobench regressions and runs as a pre-commit hook (declared, not implemented) <!-- spec-heartbeat-collects-nanobench-regressions-and-runs- -->
+- [ ] Agent frontmatter declares `skills:` (declared, not implemented) <!-- spec-agent-frontmatter-declares-skills -->
+- [ ] Rules `CPP_BENCHMARK.md`, `CPP_STATIC_ANALYSIS.md`, `PYTHON_*.md`, `cpp-test.md` are available (declared, not implemented) <!-- spec-rules-cppbenchmark-md-cppstaticanalysis-md-python- -->
+- [ ] Project at 532 tests, 100% coverage, build OK (declared, not implemented) <!-- spec-project-at-532-tests-100-coverage-build-ok -->
+- [ ] "What's Cooking" tasks (declared, not implemented) <!-- spec-what-s-cooking-tasks -->
+
+<!-- jira-sync:end -->
+
 ## 1. Purpose and scope
 
 The system distributes a set of AI-assistant instruction files (`.agent/`) and editor/CI
